@@ -10,3 +10,7 @@ __pycache__/
 # Temporary files
 *.tmp
 .DS_Store
+
+# Generated grayscale output images
+results/*_gray.jpg
+EOF
