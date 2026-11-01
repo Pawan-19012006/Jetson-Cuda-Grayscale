@@ -1,0 +1,12 @@
+# Compiled CUDA executables
+grayscale_cuda
+grayscale_cuda_e2e
+grayscale_cuda_pinned
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Temporary files
+*.tmp
+.DS_Store
