@@ -1,26 +1,26 @@
 
-#include <iostream>
+#include <iostream> //Printing output using cout and cerr
 #include <opencv2/opencv.hpp>
-#include <cuda_runtime.h>
-#include <chrono>
-#include <cmath>
+#include <cuda_runtime.h> //CUDA functions such as cudaMalloc and cudaMemcpy
+#include <chrono> //Measuring execution time
+#include <cmath> //Mathematical functions such as roundf()
 
 // CUDA kernel: each GPU thread processes one pixel
 __global__ void grayscaleKernel(
-const unsigned char* input,
-unsigned char* output,
+const unsigned char* input, //address of the input image data
+unsigned char* output, //address where the grayscale results will be written.
 int totalPixels
 ) {
-int idx = blockIdx.x * blockDim.x + threadIdx.x;
+int idx = blockIdx.x * blockDim.x + threadIdx.x; //global address, lets each thread know what pixel it is responsible for
 
 if (idx < totalPixels) {
-    int offset = idx * 3;
+    int offset = idx * 3; //for each pixel, its starting value will be at the index idx * 3 
 
     unsigned char b = input[offset];
     unsigned char g = input[offset + 1];
     unsigned char r = input[offset + 2];
 
-    float gray = 0.114f * b + 0.587f * g + 0.299f * r;
+    float gray = 0.114f * b + 0.587f * g + 0.299f * r; // greyscale calculation formula
 
     output[idx] = static_cast<unsigned char>(roundf(gray));
 }
